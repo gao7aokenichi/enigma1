@@ -1,7 +1,9 @@
-puts "a~zヲニュウリョクシテクダサイ"
-keyword = gets.chomp # chomp = 改行を防ぐ。
-
-puts "エンコード: #{keyword}"
+puts "1: エンコード 2: デコード"
+input = gets.chomp.to_i
+if input == 1
+  puts "a~zヲニュウリョクシテクダサイ"
+  keyword = gets.chomp
+puts "インプット: #{keyword}"
 
 # 暗号化した文字列を格納するための配列を定義
 rotor1 = []
@@ -24,5 +26,28 @@ keyword.chars.each do |char|
 end
 
 # 配列codeに入った文字列を全て連結させて出力
-puts "エンコードゴ: #{rotor1.join}"
+puts "アンゴウ: #{rotor1.join}"
+
+else input == 2
+puts "a~zヲニュウリョクシテクダサイ"
+keyword = gets.chomp 
+
+puts "アンゴウ: #{keyword}"
+rotor1 = []
+ count = -1 
+keyword.chars.each do |char|
+  num = char.ord - 97  
+  num2 = (num - count) % 26 
+  num3 = num2 + 97 
+  rotor1 << num3.chr 
+  count -= 1 
+  if count % 26 == 0 
+    count -= 1
+  elsif count % (26 * 26) == 0 
+    count -= 1
+  end
+end
+puts "カイドク: #{rotor1.join}"
+end
+
 
