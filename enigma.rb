@@ -1,25 +1,18 @@
 class Enigma
-  # attr_accessorは、指定した値をインスタンス変数として取り扱ってくれるメソッドです。
-  # attr_accessorは内部処理で、ゲッターとセッターの役割を同時に担っています。
-  attr_accessor :text 
+  attr_accessor :text
 
   def initialize(text)
-   # 指定された文字以外弾く
     anti_words = /[^A-z \ ]/
     if anti_words.match(text)
       puts "半角の小文字、大文字のAからZまでのアルファベット、もしくは半角のスペースのみ入力可能です。"
       exit!
     end
-     self.text = text
+    self.text = text
   end
 
   # 初期エニグマに倣い、三つのボードを準備
-  # クラス変数にランダム文字列のパスワードを入れている。。
-  # reverse:文字列を文字単位で左右逆転した文字列を返します。
-  @@board1 = [*"A".."Z"," ", *"a".."z"].each_cons(1) .to_a
-
+  @@board1 = [*"A".."Z"," ", *"a".."z"].reverse
   @@board2 = [*"A".."Z", " ", *"a".."x"].reverse.append(["z","y"]).flatten
-
   @@board3 = [*"A".."Z", " ", *"a".."v"].reverse.append(["z","y","x","w"]).flatten
   
   def get_board(count)
